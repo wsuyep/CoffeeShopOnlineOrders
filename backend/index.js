@@ -4,9 +4,11 @@ const requestHandlers = require('./request-handlers');
 
 const express = require('express');
 const app = express();
- 
+const DbHelper = require('./helpers/db-helper');
+let dbHelper = new DbHelper();
+
 app.post('/register', function (req, res) {
-    requestHandlers.registerOwner(req);
+    requestHandlers.registerOwner(req,dbHelper);
     res.send('register request');
 });
 
@@ -21,7 +23,7 @@ app.post('/createOrder', function (req, res) {
 app.post('/deleteOrder', function (req, res) {
     res.send('delete order');
 });
- 
+
 app.listen(3000,()=>{
     console.log('app listening at port 3000');
 });

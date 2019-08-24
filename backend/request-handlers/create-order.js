@@ -1,6 +1,6 @@
 'use strict';
 
-const createOrder = (request) => {
+const createOrder = (request, dbHelper) => {
     console.log('create order handler');
 };
 
