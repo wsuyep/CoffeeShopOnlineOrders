@@ -1,8 +1,6 @@
 'user strict';
 
 const sqlite3 = require('sqlite3').verbose();
-const uuid = require('node-uuid');
-const hat = require('hat');
 
 module.exports = class DbHelper {
     constructor() {
@@ -51,11 +49,12 @@ module.exports = class DbHelper {
     _createTables() {
         const createTablesSql = `
         CREATE TABLE shops(
-            shop_id UUID NOT NULL PRIMARY KEY, 
-            shop_name TEXT, 
+            shop_id UUID NOT NULL, 
+            shop_name TEXT NOT NULL, 
             api_token UUID NOT NULL UNIQUE,
-            phone TEXT, 
-            address TEXT
+            phone TEXT NOT NULL, 
+            address TEXT NOT NULL,
+            PRIMARY KEY(shop_name,address)
         );
         CREATE TABLE orders(
             shop_id UUID PRIMARY KEY, 
@@ -78,7 +77,7 @@ module.exports = class DbHelper {
             stmt.finalize((err) => {
                 if (err) {
                     console.err(err);
-                    return err;
+                    throw new Error(err);
                 }
                 return null;
             });

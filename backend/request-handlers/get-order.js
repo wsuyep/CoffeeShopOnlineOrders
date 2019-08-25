@@ -1,7 +1,8 @@
 'use strict';
 
-const getOrders = (request, dbHelper) => {
-    console.log('get order handler');
+const getOrders = (request, dbHelper, cb) => {
+    const sql = `SELECT * FROM shops;`;
+    dbHelper.getRecords(sql,cb);
 };
 
 module.exports = getOrders;

@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "sqlite3": "^4.1.0",
-    "uuid": "^3.3.3"
-  }
-}
