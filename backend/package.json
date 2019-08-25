@@ -10,6 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "hat": "^0.0.3",
+    "node-uuid": "^1.4.8",
     "sqlite3": "^4.1.0"
   }
 }
