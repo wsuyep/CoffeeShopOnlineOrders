@@ -57,8 +57,8 @@ module.exports = class DbHelper {
         );`;
         const createOrdersTableSql = `
         CREATE TABLE orders(
-            order_id UUID, 
-            shop_name TEXT UNIQUE,
+            order_id UUID NOT NULL, 
+            shop_name TEXT NOT NULL,
             order_detail TEXT NOT NULL,
             customer_phone TEXT NOT NULL, 
             picup_time DATETIME NOT NULL,

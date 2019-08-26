@@ -16,10 +16,10 @@ const createOrder = (request, dbHelper, cb) => {
             const sql = `INSERT INTO orders VALUES("${orderId}","${shopName}","${orderDetail}","${customerPhone}","${pickupTime}")`;
             dbHelper.updateTable(sql, (err) => {
                 if (err) {
-                    cb(err);
+                    cb(err,null);
                     return;
                 };
-                cb(null);
+                cb(null,orderId);
             });
         } else {
             cb(`no records found for shopName: ${shopName}`);

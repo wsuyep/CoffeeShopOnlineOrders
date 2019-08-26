@@ -32,12 +32,12 @@ app.post('/getOrders', function (req, res) {
 
 app.post('/createOrder', function (req, res) {
     const body = req.body;
-    requestHandlers.createOrder(body, dbHelper, (err) => {
+    requestHandlers.createOrder(body, dbHelper, (err,result) => {
         if (err) {
             res.status(200).send('ERROR request can not be completed due to error: ' + err);
             return;
         };
-        res.status(200).send('order has been sent to coffee shop');
+        res.status(200).send('order has been sent to coffee shop, orderId is: ' + result);
     });
 });
 
