@@ -31,7 +31,14 @@ app.post('/getOrders', function (req, res) {
 });
 
 app.post('/createOrder', function (req, res) {
-    res.status(200).send('create order');
+    const body = req.body;
+    requestHandlers.createOrder(body, dbHelper, (err) => {
+        if (err) {
+            res.status(200).send('ERROR request can not be completed due to error: ' + err);
+            return;
+        };
+        res.status(200).send('order has been sent to coffee shop');
+    });
 });
 
 app.post('/deleteOrder', function (req, res) {

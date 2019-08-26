@@ -50,19 +50,22 @@ module.exports = class DbHelper {
         const createShopsTablesSql = `
         CREATE TABLE shops(
             shop_id UUID NOT NULL, 
-            shop_name TEXT NOT NULL, 
+            shop_name TEXT UNIQUE NOT NULL, 
             api_token UUID NOT NULL UNIQUE,
             phone TEXT NOT NULL, 
-            address TEXT NOT NULL,
-            PRIMARY KEY(shop_name,address)
+            address TEXT NOT NULL
         );`;
         const createOrdersTableSql = `
         CREATE TABLE orders(
-            shop_id UUID PRIMARY KEY, 
-            shop_name TEXT, 
-            api_token UUID UNIQUE,
-            phone TEXT, 
-            address TEXT
+            order_id UUID, 
+            shop_name TEXT UNIQUE,
+            order_detail TEXT NOT NULL,
+            customer_phone TEXT NOT NULL, 
+            picup_time DATETIME NOT NULL,
+            FOREIGN KEY (
+                shop_name
+            )
+            REFERENCES shops (shop_name)
         );`;
         this._db.serialize(() => {
             this._db.run(createShopsTablesSql);
@@ -72,16 +75,16 @@ module.exports = class DbHelper {
 
     // updates tables
     // returns err if there is any
-    updateTable(query) {
+    updateTable(query,cb) {
         this._db.serialize(() => {
             var stmt = this._db.prepare(query);
             stmt.run();
             stmt.finalize((err) => {
                 if (err) {
-                    console.err(err);
-                    throw new Error(err);
+                    cb(err);
+                    return;
                 }
-                return null;
+                cb(null);
             });
         });
     };
