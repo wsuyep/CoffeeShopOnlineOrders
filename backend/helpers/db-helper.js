@@ -62,6 +62,7 @@ module.exports = class DbHelper {
             order_detail TEXT NOT NULL,
             customer_phone TEXT NOT NULL, 
             picup_time DATETIME NOT NULL,
+            status TEXT NOT NULL,
             FOREIGN KEY (
                 shop_name
             )

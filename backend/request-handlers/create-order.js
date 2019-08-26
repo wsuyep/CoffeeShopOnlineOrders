@@ -13,7 +13,7 @@ const createOrder = (request, dbHelper, cb) => {
         }
         if (rows && rows.length === 1) {
             const orderId = uuid();
-            const sql = `INSERT INTO orders VALUES("${orderId}","${shopName}","${orderDetail}","${customerPhone}","${pickupTime}")`;
+            const sql = `INSERT INTO orders VALUES("${orderId}","${shopName}","${orderDetail}","${customerPhone}","${pickupTime}","created")`;
             dbHelper.updateTable(sql, (err) => {
                 if (err) {
                     cb(err,null);

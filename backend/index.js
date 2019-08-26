@@ -42,7 +42,14 @@ app.post('/createOrder', function (req, res) {
 });
 
 app.post('/deleteOrder', function (req, res) {
-    res.status(200).send('delete order');
+    const body = req.body;
+    requestHandlers.deleteOrder(body, dbHelper, (err) => {
+        if (err) {
+            res.status(200).send('ERROR request can not be completed due to error: ' + err);
+            return;
+        };
+        res.status(200).send('order is successfully closed');
+    });
 });
 
 app.listen(3000, () => {

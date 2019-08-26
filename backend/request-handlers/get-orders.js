@@ -10,7 +10,7 @@ const getOrders = (request, dbHelper, cb) => {
             return;
         };
         if(rows && rows.length ===1){
-            const sql = `SELECT * FROM orders WHERE shop_name="${rows[0].shop_name}";`;
+            const sql = `SELECT * FROM orders WHERE shop_name="${rows[0].shop_name}" AND status="created";`;
             dbHelper.getRecords(sql,cb);
         }else{
             cb(`no records found for shopId: ${shopId}`,null);
