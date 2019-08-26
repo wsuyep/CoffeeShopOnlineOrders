@@ -47,7 +47,7 @@ module.exports = class DbHelper {
 
     // create the two tables needed for the system
     _createTables() {
-        const createTablesSql = `
+        const createShopsTablesSql = `
         CREATE TABLE shops(
             shop_id UUID NOT NULL, 
             shop_name TEXT NOT NULL, 
@@ -55,7 +55,8 @@ module.exports = class DbHelper {
             phone TEXT NOT NULL, 
             address TEXT NOT NULL,
             PRIMARY KEY(shop_name,address)
-        );
+        );`;
+        const createOrdersTableSql = `
         CREATE TABLE orders(
             shop_id UUID PRIMARY KEY, 
             shop_name TEXT, 
@@ -64,7 +65,8 @@ module.exports = class DbHelper {
             address TEXT
         );`;
         this._db.serialize(() => {
-            this._db.run(createTablesSql);
+            this._db.run(createShopsTablesSql);
+            this._db.run(createOrdersTableSql);
         });
     };
 
