@@ -10,32 +10,32 @@ let dbHelper = new DbHelper();
 
 app.post('/register', function (req, res) {
     const body = req.body;
-    try {
-        requestHandlers.registerOwner(body, dbHelper);
-    } catch (err) {
-        res.send('ERROR request can not be completed due to error: ' + err);
-    }
-    res.send('register request completed successfully');
+    requestHandlers.registerOwner(body, dbHelper, (err, data) => {
+        if (err) {
+            res.status(200).send('ERROR request can not be completed due to error: ' + err);
+            return;
+        };
+        res.status(200).send('register request completed successfully, please keep the following data secret:\n\n' + JSON.stringify(data));
+    });
 });
 
 app.post('/getOrders', function (req, res) {
     const body = req.body;
-    let results = [];
-    try {
-        requestHandlers.getOrders(body, dbHelper, (rows)=>{
-            res.send(rows);
-        });
-    } catch (err) {
-        res.send('ERROR request can not be completed due to error: ' + err);
-    };
+    requestHandlers.getOrders(body, dbHelper, (err, rows) => {
+        if (err) {
+            res.status(200).send('ERROR request can not be completed due to error: ' + err);
+            return;
+        }
+        res.status(200).send(rows);
+    });
 });
 
 app.post('/createOrder', function (req, res) {
-    res.send('create order');
+    res.status(200).send('create order');
 });
 
 app.post('/deleteOrder', function (req, res) {
-    res.send('delete order');
+    res.status(200).send('delete order');
 });
 
 app.listen(3000, () => {

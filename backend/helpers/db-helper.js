@@ -88,8 +88,10 @@ module.exports = class DbHelper {
     // returns array of objects
     getRecords(query, cb) {
         this._db.all(query, (err, rows) => {
-            if (err) return console.err(err);
-            cb(rows);
+            if (err) {
+                cb(err,null);
+            }
+            cb(null,rows);
         });
     }
 };
