@@ -7,9 +7,6 @@ module.exports = class DbHelper {
         this._db_status = false;
         this.connect();
         this._createTables();
-        // this.insertRowToTable(`INSERT INTO shops VALUES ('123','wejif','asdf','sdf','fsdf')`);
-        // this.insertRowToTable(`INSERT INTO shops VALUES ('1234','wejif','as2df','sdf','fsdf')`);
-        // this.getRecords('SELECT * FROM shops;', rows=>{rows.forEach((row)=>{console.log(row)})});
     };
 
     //connects to db
@@ -61,7 +58,7 @@ module.exports = class DbHelper {
             shop_name TEXT NOT NULL,
             order_detail TEXT NOT NULL,
             customer_phone TEXT NOT NULL, 
-            picup_time DATETIME NOT NULL,
+            pickup_time DATETIME NOT NULL,
             status TEXT NOT NULL,
             FOREIGN KEY (
                 shop_name
@@ -76,7 +73,7 @@ module.exports = class DbHelper {
 
     // updates tables
     // returns err if there is any
-    updateTable(query,cb) {
+    updateTable(query, cb) {
         this._db.serialize(() => {
             var stmt = this._db.prepare(query);
             stmt.run();
@@ -95,9 +92,9 @@ module.exports = class DbHelper {
     getRecords(query, cb) {
         this._db.all(query, (err, rows) => {
             if (err) {
-                cb(err,null);
+                cb(err, null);
             }
-            cb(null,rows);
+            cb(null, rows);
         });
     }
 };

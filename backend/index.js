@@ -8,6 +8,7 @@ app.use(bodyParser());
 const DbHelper = require('./helpers/db-helper');
 let dbHelper = new DbHelper();
 
+//endpoint for shopOwners to register their shops
 app.post('/register', function (req, res) {
     const body = req.body;
     requestHandlers.registerOwner(body, dbHelper, (err, data) => {
@@ -19,6 +20,7 @@ app.post('/register', function (req, res) {
     });
 });
 
+//endpoint for shops to fetch all available orders from their customers
 app.post('/getOrders', function (req, res) {
     const body = req.body;
     requestHandlers.getOrders(body, dbHelper, (err, rows) => {
@@ -30,6 +32,7 @@ app.post('/getOrders', function (req, res) {
     });
 });
 
+//endpoint for customers to create orders for shops
 app.post('/createOrder', function (req, res) {
     const body = req.body;
     requestHandlers.createOrder(body, dbHelper, (err,result) => {
@@ -41,6 +44,7 @@ app.post('/createOrder', function (req, res) {
     });
 });
 
+//endpoint for BOTH customers and shops to close orders
 app.post('/deleteOrder', function (req, res) {
     const body = req.body;
     requestHandlers.deleteOrder(body, dbHelper, (err) => {

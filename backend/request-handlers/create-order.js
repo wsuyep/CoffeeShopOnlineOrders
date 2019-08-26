@@ -2,6 +2,15 @@
 
 const uuid = require('uuid/v4');
 
+/*
+ * createOrder
+ * create a new order record and save it in db
+ * @param - {Object} request, the object containing { shopName, orderDetail, customerPhone, pickupTime }
+ * @param - {Object} dbHelper, the db class instance used to communicate with db
+ * @param - {function} cb, function that will be called after getting data from db
+ * @throw  - nothing, errs will be handled by cb
+ * @return - nothing if successful
+ */
 const createOrder = (request, dbHelper, cb) => {
     console.log('createOrder request received: ' + JSON.stringify(request));
     const { shopName, orderDetail, customerPhone, pickupTime } = request;
