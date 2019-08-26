@@ -3,7 +3,8 @@
 /*
  * deleteOrder
  * update order status to be 'closed' by either owner, or customer
- * @param - {Object} body, the object containing { orderId, apiToken }
+ * @param - {Object} body, the object containing  -- orderId (required for both owner and customer)
+ *                                                -- apiToken (required for onwer ONLY)
  * @param - {Object} dbHelper, the db class instance used to communicate with db
  * @param - {function} cb, function that will be called after getting data from db
  * @throw  - nothing, errs will be handled by cb
