@@ -16,6 +16,14 @@
     - `/createOrder` - used by customers to create orders to shops
     - `/delteOrder` - can be used by both Baristas and customers to complete orders
 
+### To run Server locally
+1. run `npm install` to install required packages
+2. run `npm start` to start server
+3. server now can be reached at `localhost:3000`
+
+### To build the docker image and run it on docker
+1. run `./build.sh` to build and run the docker iamges
+3. server now can be reached at `localhost:49160`
 
 ## Data Contract
 **Note that all requests bodies should be in valid JSON format**
