@@ -46,7 +46,7 @@ module.exports = class DbHelper {
     _createTables() {
         const createShopsTablesSql = `
         CREATE TABLE shops(
-            shop_id UUID NOT NULL, 
+            shop_id UUID NOT NULL PRIMARY KEY, 
             shop_name TEXT UNIQUE NOT NULL, 
             api_token UUID NOT NULL UNIQUE,
             phone TEXT NOT NULL, 
@@ -54,7 +54,7 @@ module.exports = class DbHelper {
         );`;
         const createOrdersTableSql = `
         CREATE TABLE orders(
-            order_id UUID NOT NULL, 
+            order_id UUID NOT NULL PRIMARY KEY, 
             shop_name TEXT NOT NULL,
             order_detail TEXT NOT NULL,
             customer_phone TEXT NOT NULL, 
