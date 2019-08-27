@@ -13,9 +13,9 @@ const uuid = require('uuid/v4');
  */
 const createOrder = (request, dbHelper, cb) => {
     console.log('createOrder request received: ' + JSON.stringify(request));
-    const { shopName, orderDetail, customerPhone, pickupTime } = request;
-    if(!(shopName && orderDetail && customerPhone && pickupTime)){
-        cb('Missing parameters',null);
+    const { shopName, orderDetail, customerName, customerPhone, pickupTime } = request;
+    if (!(shopName && orderDetail && customerName && customerPhone && pickupTime)) {
+        cb('Missing parameters', null);
         return;
     }
     const findShopSql = `SELECT * FROM shops WHERE shop_name="${shopName}"`;
@@ -26,13 +26,13 @@ const createOrder = (request, dbHelper, cb) => {
         }
         if (rows && rows.length === 1) {
             const orderId = uuid();
-            const sql = `INSERT INTO orders VALUES("${orderId}","${shopName}","${orderDetail}","${customerPhone}","${pickupTime}","created")`;
+            const sql = `INSERT INTO orders VALUES("${orderId}","${shopName}","${orderDetail}","${customerName}","${customerPhone}","${pickupTime}","created")`;
             dbHelper.updateTable(sql, (err) => {
                 if (err) {
-                    cb(err,null);
+                    cb(err, null);
                     return;
                 };
-                cb(null,orderId);
+                cb(null, orderId);
             });
         } else {
             cb(`no records found for shopName: ${shopName}`);

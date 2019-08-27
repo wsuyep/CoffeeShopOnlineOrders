@@ -57,6 +57,7 @@ module.exports = class DbHelper {
             order_id UUID NOT NULL PRIMARY KEY, 
             shop_name TEXT NOT NULL,
             order_detail TEXT NOT NULL,
+            customer_name TEXT NOT NULL,
             customer_phone TEXT NOT NULL, 
             pickup_time DATETIME NOT NULL,
             status TEXT NOT NULL,

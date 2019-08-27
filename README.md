@@ -83,13 +83,14 @@ Sample Output:
 ---
 
 ### `/createOrder`
-Required fields : "shopName","orderDetail","customerPhone","pickupTime"
+Required fields : "shopName","orderDetail","customerName","customerPhone","pickupTime"
 
 Sample Input:
 ```
 {
 	"shopName": "testShop",
 	"orderDetail":"2 order of fried chicken",
+	"customerName": "name",
 	"customerPhone": "7781231234",
 	"pickupTime": "2019-08-27 21:54:00"
 }
