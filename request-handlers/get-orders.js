@@ -12,6 +12,10 @@
 const getOrders = (request, dbHelper, cb) => {
     console.log('getOrder request received: ' + JSON.stringify(request));
     const {shopId, apiToken} = request;
+    if(!(shopId && apiToken)){
+        cb('Missing parameters');
+        return;
+    }
     const findApiTokenSql = `SELECT * FROM shops WHERE shop_id="${shopId}" AND api_token="${apiToken}";`;
     dbHelper.getRecords(findApiTokenSql,(err,rows)=>{
         if(err){

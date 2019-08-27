@@ -15,6 +15,10 @@ const hat = require('hat');
 const registerOwner = (body, dbHelper, cb) => {
     console.log('registerOwnder request received: ' + JSON.stringify(body));
     const { shopName, address, phone } = body;
+    if(!(shopName && address && phone)){
+        cb('Missing parameters');
+        return;
+    }
     const shopId = uuid();
     const apiToken = hat();
     const query = `INSERT INTO shops VALUES("${shopId}","${shopName}","${apiToken}","${phone}","${address}")`;

@@ -14,6 +14,10 @@ const uuid = require('uuid/v4');
 const createOrder = (request, dbHelper, cb) => {
     console.log('createOrder request received: ' + JSON.stringify(request));
     const { shopName, orderDetail, customerPhone, pickupTime } = request;
+    if(!(shopName && orderDetail && customerPhone && pickupTime)){
+        cb('Missing parameters',null);
+        return;
+    }
     const findShopSql = `SELECT * FROM shops WHERE shop_name="${shopName}"`;
     dbHelper.getRecords(findShopSql, (err, rows) => {
         if (err) {

@@ -13,6 +13,10 @@
 const deleteOrder = (body, dbHelper, cb) => {
     console.log('DeleteOrder request received: ' + JSON.stringify(body));
     const { orderId, apiToken } = body;
+    if(!orderId){
+        cb('Missing parameters');
+        return;
+    }
     const findOrderSql = `SELECT * FROM orders WHERE order_id="${orderId}"`;
     dbHelper.getRecords(findOrderSql, (err, rows) => {
         if (err) {
