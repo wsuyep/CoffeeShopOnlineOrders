@@ -16,13 +16,22 @@
     - `/createOrder` - used by customers to create orders to shops
     - `/delteOrder` - can be used by both Baristas and customers to complete orders
 
-### To run Server locally
+## To run Server locally
 1. run `npm install` to install required packages
 2. run `npm start` to start server
 3. server now can be reached at `localhost:3000`
 
-### To build the docker image and run it on docker
-1. run `./build.sh` to build and run the docker iamges
+## To run server in docker container
+1. run `./build-and-run.sh` to build and run the docker iamges
+3. server now can be reached at `localhost:49160`
+
+## To build the portable docker image artifact
+1. run `./build-portable-image.sh` to build and run the docker iamges
+2. a portable file `coffee-shop-portable-image.tar` will be generated
+
+## To import the portable docker image and run it
+1. run `docker load < ./coffee-shop-portable-image.tar` to load the image
+2. run `docker run -p 49160:8080 -d --name coffee-shop -e NODE_ENV=production coffee-shop-portable-image` to run the image in a container
 3. server now can be reached at `localhost:49160`
 
 ## Data Contract
