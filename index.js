@@ -1,6 +1,7 @@
 'use strict';
 
 const requestHandlers = require('./request-handlers');
+const config = require('./config');
 const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
@@ -56,6 +57,6 @@ app.post('/deleteOrder', function (req, res) {
     });
 });
 
-app.listen(3000, () => {
-    console.log('app listening at port 3000');
+app.listen(config.port, () => {
+    console.log(`app listening at port ${config.port}`);
 });
