@@ -17,7 +17,7 @@ const deleteOrder = (body, dbHelper, cb) => {
         cb('Missing parameters');
         return;
     }
-    const findOrderSql = `SELECT * FROM orders WHERE order_id="${orderId}"`;
+    const findOrderSql = `SELECT * FROM orders WHERE order_id="${orderId}" AND status="created"`;
     dbHelper.getRecords(findOrderSql, (err, rows) => {
         if (err) {
             cb(err);

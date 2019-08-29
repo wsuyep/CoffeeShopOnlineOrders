@@ -7,6 +7,45 @@
 ### Entity Relation Diagram
 ![ERD](ERD.png)
 
+### Directory Tree
+```
+.
+├── Dockerfile
+├── ERD.png
+├── README.md
+├── build-and-run.sh
+├── build-portable-image.sh
+├── config
+│   ├── development.json
+│   ├── index.js
+│   └── production.json
+├── design.png
+├── errors
+│   └── base-error.js
+├── helpers
+│   ├── db-helper.js
+│   └── log-helper.js
+├── index.js
+├── package-lock.json
+├── package.json
+├── request-handlers
+│   ├── create-order.js
+│   ├── delete-order.js
+│   ├── get-orders.js
+│   ├── index.js
+│   └── register-owner.js
+└── tests
+    └── cucumber
+        ├── features
+        │   └── request-handlers
+        │       ├── create-order.feature
+        │       ├── delete-order.feature
+        │       ├── get-orders.feature
+        │       └── register-owner.feature
+        └── steps
+            ├── db.js
+            └── world.js
+```
 
 ## BackEnd Server
 1. Currently, only the backend logic is implemented
@@ -15,6 +54,9 @@
     - `/getOrders` - used by Baristas to check all available orders for their shops
     - `/createOrder` - used by customers to create orders to shops
     - `/delteOrder` - can be used by both Baristas and customers to complete orders
+
+## To run Tests
+1. run `npm run cucumber`
 
 ## To run Server locally
 1. run `npm install` to install required packages

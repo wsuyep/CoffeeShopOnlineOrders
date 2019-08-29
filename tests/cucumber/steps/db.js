@@ -36,13 +36,33 @@ Given('An order is created in the database', function (callback) {
     });
 })
 
-When('I send a valid {word} request', function (input, callback) {
+When(/^I send (?:a|another) valid (\w+) request$/i, function (input, callback) {
     handlerMapping[input](this.payload, this.dbHelper, (err, resp) => {
-        if (!err) this.testResult = true;
+        if(err){
+            this.error = err;
+            this.testResult = false;
+        }else{
+            this.testResult = true;
+        }
         this.response = resp;
         callback();
     })
 })
+
+When('I send an invalid {word} request', function (input, callback) {
+    this.payload = {};
+    handlerMapping[input](this.payload, this.dbHelper, (err, resp) => {
+        if(err){
+            this.error = err;
+            this.testResult = false;
+        }else{
+            this.testResult = true;
+        }
+        this.response = resp;
+        callback();
+    })
+})
+
 Then('I get a successful response', function () {
     expect(this.testResult).toEqual(true);
 })
@@ -52,6 +72,7 @@ Then('The result has exactly {int} record', function (input, callback) {
     callback();
 });
 
-After(function (callback) {
-
-})
+Then('I get an error response with message: {string}',function(input){
+    expect(this.testResult).toEqual(false);
+    expect(this.error.includes(input)).toEqual(true);
+});
